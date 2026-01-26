@@ -1,0 +1,119 @@
+.projects {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+}
+
+.projects-header {
+    margin-bottom: var(--space-12);
+}
+
+.projects-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: var(--color-text-primary);
+}
+
+.projects-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.project-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: var(--space-8);
+    padding: var(--space-10) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.4s ease;
+}
+
+.project-item:first-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.project-item:hover {
+    padding-left: var(--space-4);
+}
+
+.project-number {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-purple-accent);
+    font-family: monospace;
+}
+
+.project-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.project-title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    transition: color 0.3s ease;
+}
+
+.project-item:hover .project-title {
+    color: var(--color-purple-accent);
+}
+
+.project-description {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    line-height: 1.7;
+}
+
+.project-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--space-2);
+}
+
+.project-tech {
+    display: flex;
+    gap: var(--space-4);
+}
+
+.project-tech span {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+}
+
+.project-links {
+    display: flex;
+    gap: var(--space-6);
+}
+
+.project-links a {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    transition: color 0.3s ease;
+}
+
+.project-links a:hover {
+    color: var(--color-purple-accent);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .project-item {
+        grid-template-columns: 1fr;
+        gap: var(--space-3);
+    }
+
+    .project-number {
+        order: -1;
+    }
+
+    .project-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-4);
+    }
+}
