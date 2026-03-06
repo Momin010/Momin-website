@@ -6,9 +6,10 @@ const achievements = [
     { icon: '🦈', title: 'Pull Shark', desc: 'GitHub badge' },
     { icon: '🔥', title: '2,288+', desc: 'Contributions' },
     { icon: '📦', title: '110+', desc: 'Repositories' },
-    { icon: '🏛️', title: 'Parliament', desc: 'Training' },
-    { icon: '🏙️', title: 'Mayor', desc: 'Shadow' },
+    { icon: '🏛️', title: 'Parliament', desc: 'Training', certificate: '/certificates/eduskunta.pdf' },
+    { icon: '🏙️', title: 'Mayor', desc: 'Shadow', certificate: '/certificates/pormestari.pdf' },
     { icon: '🤝', title: '500+', desc: 'Connections' },
+    { icon: '🎓', title: 'Haaga-Helia', desc: 'University', certificate: '/certificates/haaga-helia.pdf' },
 ]
 
 export default function Achievements() {
@@ -42,11 +43,23 @@ export default function Achievements() {
                             animate={isInView ? { opacity: 1, y: 0 } : {}}
                             transition={{ duration: 0.4, delay: 0.1 * i }}
                         >
-                            <span className="achievement-icon">{item.icon}</span>
-                            <div className="achievement-text">
-                                <span className="achievement-title">{item.title}</span>
-                                <span className="achievement-desc">{item.desc}</span>
-                            </div>
+                            {item.certificate ? (
+                                <a href={item.certificate} target="_blank" rel="noopener noreferrer" className="achievement-link">
+                                    <span className="achievement-icon">{item.icon}</span>
+                                    <div className="achievement-text">
+                                        <span className="achievement-title">{item.title}</span>
+                                        <span className="achievement-desc">{item.desc}</span>
+                                    </div>
+                                </a>
+                            ) : (
+                                <>
+                                    <span className="achievement-icon">{item.icon}</span>
+                                    <div className="achievement-text">
+                                        <span className="achievement-title">{item.title}</span>
+                                        <span className="achievement-desc">{item.desc}</span>
+                                    </div>
+                                </>
+                            )}
                         </motion.div>
                     ))}
                 </motion.div>
