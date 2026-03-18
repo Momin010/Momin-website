@@ -1,0 +1,317 @@
+/* macOS Tahoe "Liquid Glass" Theme - Light Version */
+
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.4);
+  --glass-bg-active: rgba(255, 255, 255, 0.5);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-shine: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 60%);
+  --os-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+  --dock-bg: rgba(255, 255, 255, 0.3);
+  --text-primary: #1d1d1f; /* Standard Apple dark text */
+  --text-secondary: #424245;
+}
+
+/* Base Styles */
+body {
+    margin: 0;
+    font-family: var(--os-font);
+    overflow: hidden;
+    color: var(--text-primary);
+}
+
+/* Liquid Glass Effect */
+.liquid-glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(50px) saturate(190%);
+    -webkit-backdrop-filter: blur(50px) saturate(190%);
+    border: 0.5px solid var(--glass-border);
+    box-shadow: 
+        inset 0 1px 1px rgba(255, 255, 255, 0.4),
+        0 30px 80px rgba(0, 0, 0, 0.15);
+    position: relative;
+}
+
+/* Specific content layer */
+.window-inner-content {
+    position: relative;
+    z-index: 5;
+    color: var(--text-primary); /* Dark text for light glass */
+}
+
+/* Resize Handle */
+.resize-handle {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    cursor: nwse-resize;
+    z-index: 100;
+}
+
+/* Menu Bar */
+.menu-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  z-index: 9999;
+  user-select: none;
+  font-size: 13px;
+  font-weight: 500;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.3);
+  color: #000;
+}
+
+.menu-item {
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: default;
+  transition: background 0.2s;
+}
+
+.menu-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.apple-logo {
+    font-size: 18px;
+    margin-right: 15px;
+}
+
+/* Dock */
+.dock-container {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--dock-bg);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border-radius: 24px;
+  padding: 10px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  border: 0.5px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+  z-index: 10000;
+}
+
+.dock-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.dock-icon-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.dock-tooltip {
+  position: absolute;
+  top: -45px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  color: #000;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.dock-icon:hover .dock-tooltip {
+  opacity: 1;
+}
+
+.dock-dot {
+    position: absolute;
+    bottom: -8px;
+    width: 4px;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+}
+
+/* Window */
+.window-frame {
+  position: absolute;
+  border-radius: 20px; /* Larger radius matching Tahoe */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.title-bar {
+  height: 48px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+  cursor: default;
+  z-index: 2;
+}
+
+.traffic-lights {
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.traffic-light {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer !important;
+}
+
+.light-close { background: #ff5f57; }
+.light-minimize { background: #febc2e; }
+.light-maximize { background: #28c840; }
+
+.window-title {
+  position: absolute;
+  left: 0; right: 0;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  pointer-events: none;
+}
+
+.window-content-area {
+  flex-grow: 1;
+  background: transparent;
+  overflow: auto;
+  position: relative;
+  z-index: 2;
+  border-radius: 0 0 20px 20px;
+}
+
+/* Content Legibility Overrides */
+.window-content-area section {
+    padding: 32px !important;
+}
+
+.window-content-area h2, 
+.window-content-area h3, 
+.window-content-area .section-title,
+.window-content-area .about-title,
+.window-content-area .stat-value {
+    color: var(--text-primary) !important;
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+}
+
+.window-content-area p,
+.window-content-area .about-text,
+.window-content-area .section-subtitle,
+.window-content-area .stat-label {
+    color: var(--text-secondary) !important;
+}
+
+.window-content-area .tech-item {
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    background: rgba(0, 0, 0, 0.03) !important;
+    color: var(--text-secondary) !important;
+}
+
+.window-content-area .tech-item:hover {
+    background: rgba(0, 0, 0, 0.08) !important;
+}
+
+.window-content-area .stats-row {
+    border-top: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Maximize logic */
+.window-frame.maximized {
+    width: 100vw !important;
+    height: calc(100vh - 32px) !important;
+    top: 32px !important;
+    left: 0 !important;
+    border-radius: 0;
+    transform: none !important;
+}
+
+.window-frame.maximized .window-content-area {
+    border-radius: 0;
+}
+
+/* Apply refraction ONLY to a background layer */
+.liquid-glass-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    filter: url(#liquid-refraction);
+    opacity: 0.3; /* Subtle refraction */
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Desktop Area */
+.desktop-area {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.desktop-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 12px;
+    transition: background 0.2s;
+    width: 90px;
+}
+
+.desktop-icon:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.desktop-icon-label {
+    font-size: 12px;
+    color: white;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Scrollbar */
+.window-content-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.window-content-area::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.window-content-area::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
